@@ -19,35 +19,46 @@
 # Code for 3-6
 ###################################
 
+# Functions for date and time (3-6)
 from datetime import datetime
+
+# Find the current time
 currentTime = datetime.now()
-print(currentTime)
 
 # Find the current hour
 currentHour = currentTime.hour
-print(currentHour)
 
 # Find current day
 currentDayName = currentTime.strftime("%A")
 
 # Find day number of the week (1 = M, 7 = Sun)
 currentDayNumber = currentTime.isoweekday()
-print(currentDayNumber)
-
-
 
 ###################################
 # 3) Check if it's 7AM or later
 ###################################
+if currentHour >= 7:
+        weekdayTime = True
+else:
+        weekdayTime = False
 
 ###################################
 # 4) Check if it's a weekday
+# 6) Check if it's a weekend
 ###################################
+if currentDayName <= 5:
+        isWeekday = True
+else:
+        isWeekday = False
 
 ###################################
 # 5) Check if it's 10AM or later
 ###################################
-
+if currentHour >= 10:
+        weekendTime = True
+else:
+        weekendTime = False
+        
 ###################################
-# 6) Check if it's a weekend
+# 
 ###################################
