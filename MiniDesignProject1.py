@@ -79,7 +79,8 @@ def toggleAlarm():
         # buzzer = Buzzer(19)
         
         # If the alarm should be sounding, turn the buzzer on
-        if alarmSounding:
+        # alarmSounding = True, and the user hasn't turned the alarm off yet
+        if alarmSounding and not alarmTurnedOff:
                 # buzzer.on()
                 playAlarmMelody()
         # else:
@@ -127,9 +128,9 @@ currentDayNumber = currentTime.isoweekday()
 # 3) Check if it's 7AM or later
 ###################################
 if currentHour >= 7:
-        weekdayTime = True
+        after7 = True
 else:
-        weekdayTime = False
+        after7 = False
 
 ###################################
 # 4) Check if it's a weekday
@@ -144,10 +145,41 @@ else:
 # 5) Check if it's 10AM or later
 ###################################
 if currentHour >= 10:
+        after10 = True
+else:
+        after10 = False
+        
+###################################
+# Logic to run system
+###################################
+
+# Wake up on time = Alarm sounds AND user turns alarm off
+if alarmSounding and alarmTurnedOff:
+        wakeUpOnTime = True
+else:
+        wakeUpOnTime = False
+        
+# Weekday time = 7AM+ AND isWeekday
+if after7 and isWeekday:
+        weekdayTime = True
+else:
+        weekdayTime = False
+        
+# Weekend time = 10AM+ AND not isWeekend (is weekend)
+if after10 and not isWeekday:
         weekendTime = True
 else:
         weekendTime = False
+
+# You Overslept = weekdayTime OR weekendTime
+if weekdayTime or weekendTime:
+        youOverslept = True
+else:
+        youOverslept = False
         
-###################################
-# 
-###################################
+# Start coffee maker if you wake up on time XOR you overslept
+# youOverslept = False # (For testing, make youOverslept false or else it'll always be true (after 7/10AM))
+if wakeUpOnTime ^ youOverslept:
+        startCoffee = True
+else:
+        startCoffee = False
