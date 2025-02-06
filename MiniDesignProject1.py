@@ -139,7 +139,7 @@ else:
 # 4) Check if it's a weekday
 # 6) Check if it's a weekend
 ###################################
-if currentDayName <= 5:
+if currentDayNumber <= 5:
         isWeekday = True
 else:
         isWeekday = False
