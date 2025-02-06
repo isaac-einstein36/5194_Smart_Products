@@ -61,7 +61,7 @@ def play_note(frequency, duration):
     sleep(0.05)  # Small delay between notes
 
 def playCarmen():
-        # Notes (frequencies in Hz) & durations
+        # Notes (frequencies in Hz)
         C4  = 262
         D4  = 294
         E4  = 330
@@ -74,22 +74,22 @@ def playCarmen():
         E5  = 659
         F5  = 698
         G5  = 784
-        REST = 0  # Rest note (silence)
+        REST = 0  # Rest (silence)
 
-        # Melody for "Carmen Ohio" (simplified)
+        # Melody for "Carmen Ohio" (accurately mapped)
         melody = [
-        C4, G4, A4, F4, G4, E4, F4, D4,  # "Oh come let’s sing Ohio’s praise"
-        G4, E4, F4, D4, C4, G4, A4, F4,  # "And songs to Alma Mater raise"
-        G4, C5, B4, A4, G4, F4, E4, D4,  # "While our hearts rebounding thrill"
-        C4, G4, A4, F4, G4, C5, B4, A4   # "With joy which death alone can still"
+        C4, F4, G4, A4, G4, F4, E4, D4,  REST,  # "Oh come let’s sing Ohio’s praise"
+        C4, F4, G4, A4, G4, C5, B4, A4,  REST,  # "And songs to Alma Mater raise"
+        A4, G4, A4, C5, B4, A4, G4, F4,  REST,  # "While our hearts rebounding thrill"
+        E4, G4, F4, E4, D4, C4, B4, C4           # "With joy which death alone can still"
         ]
 
-        # Note durations (in seconds)
+        # Note durations (seconds, adjusted for buzzer timing)
         durations = [
-        0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
-        0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
-        0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
-        0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1
+        0.6, 0.6, 0.6, 0.8, 0.5, 0.5, 0.7, 1.0,  0.3,  
+        0.6, 0.6, 0.6, 0.8, 0.5, 0.6, 0.8, 1.0,  0.3,  
+        0.6, 0.6, 0.6, 0.8, 0.5, 0.6, 0.8, 1.0,  0.3,  
+        0.6, 0.6, 0.6, 0.6, 0.7, 0.8, 1.2, 1.5
         ]
       
         for note, duration in zip(melody, durations):
