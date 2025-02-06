@@ -215,7 +215,7 @@ while True:
                 
         # Start coffee maker if you wake up on time XOR you overslept
         # youOverslept = False # (For testing, make youOverslept false or else it'll always be true (after 7/10AM))
-        youOverslept = False
+        
         if wakeUpOnTime ^ youOverslept:
                 startCoffee = True
         else:
@@ -226,6 +226,8 @@ while True:
         ###################################
 
         # If the coffee maker should be on, turn the LED on
+        # Also for testing, unplug GPIO 22 wire to have LED output solely from AND gate
+
         if startCoffee:
                 coffeeLED.on()
         else:
