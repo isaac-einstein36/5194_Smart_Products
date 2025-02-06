@@ -63,6 +63,8 @@ def play_note(frequency, duration):
     buzzer.value = 0  # Stop the sound
     sleep(0.05)  # Small delay between notes
 
+# def playCarmen():
+       
 
 # Define function to play Twinkle Twinkle Little Star on the alarm
 def playAlarmMelody():
@@ -98,10 +100,16 @@ def playAlarmMelody():
              
 
 # Define function to sound or quiet alarm
-def toggleAlarm():
+def soundAlarm():
         # Toggle the alarmSounding variable each time the button is pushed
         global alarmSounding
-        alarmSounding = not alarmSounding
+        # alarmSounding = not alarmSounding
+        alarmSounding = True
+
+        if alarmSounding:
+               print("Alarm Can Play")
+        else:
+               print("Alarm Can't Play")
 
         # if the song doesn't work, just turn the buzzer on or off        
         # buzzer = Buzzer(19)
@@ -109,7 +117,7 @@ def toggleAlarm():
         # If the alarm should be sounding, turn the buzzer on
         # alarmSounding = True, and the user hasn't turned the alarm off yet
         if alarmSounding and not alarmTurnedOff:
-                print("Alarm Should Be Sounding")
+                print("Alarm Is Sounding")
                 # buzzer.on()
                 playAlarmMelody()
         # else:
@@ -122,7 +130,7 @@ def toggleAlarm():
 
 # Declare button to turn the alarm on or off
 soundAlarmButton = Button(18)
-soundAlarmButton.when_pressed = toggleAlarm
+soundAlarmButton.when_pressed = soundAlarm
 
 ###################################
 # 2) Check if the alarm is turned off
