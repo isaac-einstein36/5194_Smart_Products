@@ -137,7 +137,8 @@ def soundAlarm():
         # alarmSounding = True, and the user hasn't turned the alarm off yet
         if alarmSounding and not alarmTurnedOff:
                 print("Alarm Is Sounding")
-                playAlarmMelody()
+                # playAlarmMelody()
+                playCarmen()
 
 ###################################
 # 1) Check if the alarm is sounding
