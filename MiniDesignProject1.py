@@ -165,6 +165,10 @@ else:
 # Declare LED for coffee maker
 coffeeLED = LED(22)
 
+# LEDs for AND logic gate
+gateA = LED(5)
+gateB = LED(6)
+
 ###################################
 # Loop continuously
 ###################################
@@ -173,6 +177,17 @@ while True:
         ###################################
         # Logic to run system
         ###################################
+
+        # Turn on pin with button press
+        if alarmSounding:
+                gateA.on()
+        else:
+                gateA.off()
+                
+        if alarmTurnedOff:
+                gateB.on()
+        else:
+                gateB.off()
 
         # Wake up on time = Alarm sounds AND user turns alarm off
         if alarmSounding and alarmTurnedOff:
