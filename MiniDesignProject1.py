@@ -14,12 +14,15 @@ from time import sleep
 # Functions for date and time (3-6)
 from datetime import datetime
 
+# Functions for coffee maker LED
+from gpiozero import LED
+
 ###################################
 # 1) Check if the alarm is sounding
 ###################################
 
 # Create global variable for if alarm is playing
-alarmSounding = False
+alarmSounding = False 
 
 # Define the buzzer to play the alarm ringtone
 buzzer = PWMOutputDevice(19)
@@ -183,3 +186,16 @@ if wakeUpOnTime ^ youOverslept:
         startCoffee = True
 else:
         startCoffee = False
+        
+###################################
+# Start the coffee maker
+###################################
+
+# Declare LED for coffee maker
+coffeeLED = LED(22)
+
+# If the coffee maker should be on, turn the LED on
+if startCoffee:
+        coffeeLED.on()
+else:
+        coffeeLED.off()
