@@ -47,9 +47,6 @@ def turnOffAlarm():
             print("User Turned Off Alarm")
     else:
             print("User Turned Alarm Back On")
-        
-#     alarmTurnedOff = True
-
     
 # Function to play a note (from ChatGPT)
 def play_note(frequency, duration):
@@ -63,7 +60,40 @@ def play_note(frequency, duration):
     buzzer.value = 0  # Stop the sound
     sleep(0.05)  # Small delay between notes
 
-# def playCarmen():
+def playCarmen():
+
+        # Notes (frequency in Hz) and durations (seconds)
+        C4 = 262
+        D4 = 294
+        E4 = 330
+        F4 = 349
+        G4 = 392
+        A4 = 440
+        B4 = 494
+        C5 = 523
+        D5 = 587
+        E5 = 659
+        F5 = 698
+        G5 = 784
+
+        # Carmen Ohio melody (simplified)
+        melody = [
+        C4, G4, A4, F4, G4, E4, F4, D4,   # "Oh come let’s sing Ohio’s praise"
+        G4, E4, F4, D4, C4, G4, A4, F4,   # "And songs to Alma Mater raise"
+        G4, C5, B4, A4, G4, F4, E4, D4,   # "While our hearts rebounding thrill"
+        C4, G4, A4, F4, G4, C5, B4, A4    # "With joy which death alone can still"
+        ]
+
+        # Note durations (1 = whole note, 0.5 = half note, etc.)
+        durations = [
+        0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
+        0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
+        0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
+        0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1
+        ]
+        
+        for note, duration in zip(melody, durations):
+                play_note(note, duration)
        
 
 # Define function to play Twinkle Twinkle Little Star on the alarm
@@ -94,10 +124,7 @@ def playAlarmMelody():
         
         # Play the melody
         for note, duration in zip(melody, durations):
-                play_note(note, duration)
-
-        print("Melody finished!")   
-             
+                play_note(note, duration)             
 
 # Define function to sound or quiet alarm
 def soundAlarm():
@@ -105,24 +132,12 @@ def soundAlarm():
         global alarmSounding
         # alarmSounding = not alarmSounding
         alarmSounding = True
-
-        if alarmSounding:
-               print("Alarm Can Play")
-        else:
-               print("Alarm Can't Play")
-
-        # if the song doesn't work, just turn the buzzer on or off        
-        # buzzer = Buzzer(19)
-        
+                
         # If the alarm should be sounding, turn the buzzer on
         # alarmSounding = True, and the user hasn't turned the alarm off yet
         if alarmSounding and not alarmTurnedOff:
                 print("Alarm Is Sounding")
-                # buzzer.on()
                 playAlarmMelody()
-        # else:
-        #         # buzzer.off()
-
 
 ###################################
 # 1) Check if the alarm is sounding
