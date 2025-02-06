@@ -38,6 +38,19 @@ alarmTurnedOff = False
 # User Defined Functions
 ###################################
         
+# Define the function to be called when the button is pressed
+def turnOffAlarm():
+    global alarmTurnedOff
+    alarmTurnedOff = not alarmTurnedOff
+    
+    if alarmTurnedOff:
+            print("User Turned Off Alarm")
+    else:
+            print("User Turned Alarm Back On")
+        
+#     alarmTurnedOff = True
+
+    
 # Function to play a note (from ChatGPT)
 def play_note(frequency, duration):
     if frequency == 0:  # Rest note
@@ -96,20 +109,11 @@ def toggleAlarm():
         # If the alarm should be sounding, turn the buzzer on
         # alarmSounding = True, and the user hasn't turned the alarm off yet
         if alarmSounding and not alarmTurnedOff:
+                print("Alarm Should Be Sounding")
                 # buzzer.on()
                 playAlarmMelody()
         # else:
         #         # buzzer.off()
-
-# Define the function to be called when the button is pressed
-def turnOffAlarm():
-    global alarmTurnedOff
-    alarmTurnedOff = True
-
-# Define the function to be called when the button is pressed
-def turnOffAlarm():
-    global alarmTurnedOff
-    alarmTurnedOff = True
 
 
 ###################################
