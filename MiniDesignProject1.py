@@ -61,40 +61,39 @@ def play_note(frequency, duration):
     sleep(0.05)  # Small delay between notes
 
 def playCarmen():
+        # Notes (frequencies in Hz) & durations
+        C4  = 262
+        D4  = 294
+        E4  = 330
+        F4  = 349
+        G4  = 392
+        A4  = 440
+        B4  = 494
+        C5  = 523
+        D5  = 587
+        E5  = 659
+        F5  = 698
+        G5  = 784
+        REST = 0  # Rest note (silence)
 
-        # Notes (frequency in Hz) and durations (seconds)
-        C4 = 262
-        D4 = 294
-        E4 = 330
-        F4 = 349
-        G4 = 392
-        A4 = 440
-        B4 = 494
-        C5 = 523
-        D5 = 587
-        E5 = 659
-        F5 = 698
-        G5 = 784
-
-        # Carmen Ohio melody (simplified)
+        # Melody for "Carmen Ohio" (simplified)
         melody = [
-        C4, G4, A4, F4, G4, E4, F4, D4,   # "Oh come let’s sing Ohio’s praise"
-        G4, E4, F4, D4, C4, G4, A4, F4,   # "And songs to Alma Mater raise"
-        G4, C5, B4, A4, G4, F4, E4, D4,   # "While our hearts rebounding thrill"
-        C4, G4, A4, F4, G4, C5, B4, A4    # "With joy which death alone can still"
+        C4, G4, A4, F4, G4, E4, F4, D4,  # "Oh come let’s sing Ohio’s praise"
+        G4, E4, F4, D4, C4, G4, A4, F4,  # "And songs to Alma Mater raise"
+        G4, C5, B4, A4, G4, F4, E4, D4,  # "While our hearts rebounding thrill"
+        C4, G4, A4, F4, G4, C5, B4, A4   # "With joy which death alone can still"
         ]
 
-        # Note durations (1 = whole note, 0.5 = half note, etc.)
+        # Note durations (in seconds)
         durations = [
         0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
         0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
         0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1,
         0.5, 0.5, 0.5, 0.5, 0.75, 0.25, 1, 1
         ]
-        
+      
         for note, duration in zip(melody, durations):
                 play_note(note, duration)
-       
 
 # Define function to play Twinkle Twinkle Little Star on the alarm
 def playAlarmMelody():
