@@ -7,6 +7,10 @@
 6) Check if it's a weekend
 """
 
+###################################
+# Imported Functions
+###################################
+
 # Functions for button and buzzer (1 and 2)
 from gpiozero import Button, PWMOutputDevice
 from time import sleep
@@ -18,7 +22,7 @@ from datetime import datetime
 from gpiozero import LED
 
 ###################################
-# 1) Check if the alarm is sounding
+# Global Variables
 ###################################
 
 # Create global variable for if alarm is playing
@@ -26,6 +30,13 @@ alarmSounding = False
 
 # Define the buzzer to play the alarm ringtone
 buzzer = PWMOutputDevice(19)
+
+# Declare global alarm turned off bool
+alarmTurnedOff = False
+
+###################################
+# User Defined Functions
+###################################
         
 # Function to play a note (from ChatGPT)
 def play_note(frequency, duration):
@@ -70,7 +81,8 @@ def playAlarmMelody():
         for note, duration in zip(melody, durations):
                 play_note(note, duration)
 
-        print("Melody finished!")        
+        print("Melody finished!")   
+             
 
 # Define function to sound or quiet alarm
 def toggleAlarm():
@@ -88,7 +100,22 @@ def toggleAlarm():
                 playAlarmMelody()
         # else:
         #         # buzzer.off()
-                
+
+# Define the function to be called when the button is pressed
+def turnOffAlarm():
+    global alarmTurnedOff
+    alarmTurnedOff = True
+
+# Define the function to be called when the button is pressed
+def turnOffAlarm():
+    global alarmTurnedOff
+    alarmTurnedOff = True
+
+
+###################################
+# 1) Check if the alarm is sounding
+###################################
+
 # Declare button to turn the alarm on or off
 soundAlarmButton = Button(18)
 soundAlarmButton.when_pressed = toggleAlarm
@@ -96,14 +123,6 @@ soundAlarmButton.when_pressed = toggleAlarm
 ###################################
 # 2) Check if the alarm is turned off
 ###################################
-
-# Declare global alarm turned off bool
-alarmTurnedOff = False
-
-# Define the function to be called when the button is pressed
-def turnOffAlarm():
-    global alarmTurnedOff
-    alarmTurnedOff = True
 
 # Declare the turnOff button on GPIO pin 17
 turnOffAlarmButton = Button(17)
@@ -151,51 +170,57 @@ if currentHour >= 10:
         after10 = True
 else:
         after10 = False
-        
-###################################
-# Logic to run system
-###################################
-
-# Wake up on time = Alarm sounds AND user turns alarm off
-if alarmSounding and alarmTurnedOff:
-        wakeUpOnTime = True
-else:
-        wakeUpOnTime = False
-        
-# Weekday time = 7AM+ AND isWeekday
-if after7 and isWeekday:
-        weekdayTime = True
-else:
-        weekdayTime = False
-        
-# Weekend time = 10AM+ AND not isWeekend (is weekend)
-if after10 and not isWeekday:
-        weekendTime = True
-else:
-        weekendTime = False
-
-# You Overslept = weekdayTime OR weekendTime
-if weekdayTime or weekendTime:
-        youOverslept = True
-else:
-        youOverslept = False
-        
-# Start coffee maker if you wake up on time XOR you overslept
-# youOverslept = False # (For testing, make youOverslept false or else it'll always be true (after 7/10AM))
-if wakeUpOnTime ^ youOverslept:
-        startCoffee = True
-else:
-        startCoffee = False
-        
-###################################
-# Start the coffee maker
-###################################
 
 # Declare LED for coffee maker
 coffeeLED = LED(22)
 
-# If the coffee maker should be on, turn the LED on
-if startCoffee:
-        coffeeLED.on()
-else:
-        coffeeLED.off()
+###################################
+# Loop continuously
+###################################
+while True:
+
+        ###################################
+        # Logic to run system
+        ###################################
+
+        # Wake up on time = Alarm sounds AND user turns alarm off
+        if alarmSounding and alarmTurnedOff:
+                wakeUpOnTime = True
+        else:
+                wakeUpOnTime = False
+                
+        # Weekday time = 7AM+ AND isWeekday
+        if after7 and isWeekday:
+                weekdayTime = True
+        else:
+                weekdayTime = False
+                
+        # Weekend time = 10AM+ AND not isWeekend (is weekend)
+        if after10 and not isWeekday:
+                weekendTime = True
+        else:
+                weekendTime = False
+
+        # You Overslept = weekdayTime OR weekendTime
+        if weekdayTime or weekendTime:
+                youOverslept = True
+        else:
+                youOverslept = False
+                
+        # Start coffee maker if you wake up on time XOR you overslept
+        # youOverslept = False # (For testing, make youOverslept false or else it'll always be true (after 7/10AM))
+        youOverslept = False
+        if wakeUpOnTime ^ youOverslept:
+                startCoffee = True
+        else:
+                startCoffee = False
+                
+        ###################################
+        # Start the coffee maker
+        ###################################
+
+        # If the coffee maker should be on, turn the LED on
+        if startCoffee:
+                coffeeLED.on()
+        else:
+                coffeeLED.off()
