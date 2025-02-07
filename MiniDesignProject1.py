@@ -1,3 +1,7 @@
+## 5194 Mini Project 1 Code
+## Sabina Williams and Isaac Einstein
+## 6 February 2025
+
 """
 1) Check if alarm sounds
 2) Check if alarm is turned off
